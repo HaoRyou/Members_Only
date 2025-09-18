@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Creating Post</title>
+  </head>
+  <body>
+    <h1>Write Your post</h1>
+    <form action="/create_post" method="POST">
+      <label for="input">Input</label>
+      <input
+        id="input"
+        name="input"
+        placeholder="Write Something"
+        type="text"
+      />
+      <input type="hidden" name="author" value="<%= user.username %>" />
+      <button type="submit">Post</button>
+    </form>
+  </body>
+</html>

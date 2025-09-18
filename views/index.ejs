@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Log In</title>
+  </head>
+  <body>
+    <% if (locals.user) {%>
+    <h1>WELCOME BACK <%= user.username %></h1>
+    <a href="/create_post">Write Post</a>
+    <a href="/log-out">LOG OUT</a>
+    <% if (isadmin == false) { %>
+    <form action="/admin" method="post">
+      <label for="adminpw">Admin Login</label>
+      <input type="text" name="adminpw">
+      <button type="submit">Submit</button>
+    </form>
+    <% } %>
+      
+        <% for(let i=0;i<messages.length; i++){%>
+            <div>
+                <p><strong>Message: </strong><%=messages[i].message %></p>
+                <p><strong>User: </strong><%=messages[i].author %></p>
+                <% if (isadmin) { %>
+                  <button type="button">
+                    <a href="/delete/<%= messages[i].id %>">Delete</a>
+                  </button>
+                <% } %>
+            </div>
+        <%}%>
+    <% } else { %>
+    <h1>please log in</h1>
+    <a href="/sign-up">Create a account</a>
+    <form action="/log-in" method="POST">
+      <label for="username">Username</label>
+      <input id="username" name="username" placeholder="username" type="text" />
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" />
+      <button type="submit">Log In</button>
+
+      <% for(let i=0;i<messages.length; i++){%>
+            <div>
+                <p><strong>Message: </strong><%=messages[i].message %></p>
+                <p><strong>User: </strong>Anonymous</p>
+            </div>
+        <%}%>
+    </form>
+    <%}%>
+  </body>
+</html>
